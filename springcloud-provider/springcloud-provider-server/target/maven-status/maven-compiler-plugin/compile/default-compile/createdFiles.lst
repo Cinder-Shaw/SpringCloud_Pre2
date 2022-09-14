@@ -1,0 +1,11 @@
+com\gxshen\latte\service\ISysLoginLogService.class
+com\gxshen\latte\mapstruct\SysLoginLogConvertorImpl.class
+com\gxshen\latte\controller\SysLoginLogController.class
+com\gxshen\latte\generator\MybatisAutoGenerator.class
+com\gxshen\latte\repository\SysLoginLogMapper.class
+com\gxshen\latte\repository\SysUserMapper.class
+com\gxshen\latte\ProviderApplication.class
+com\gxshen\latte\mapstruct\SysLoginLogConvertor.class
+com\gxshen\latte\mybatis\MybatisConfig.class
+com\gxshen\latte\service\impl\SysLoginLogServiceImpl.class
+com\gxshen\latte\DTO\SysLoginLogDTO.class

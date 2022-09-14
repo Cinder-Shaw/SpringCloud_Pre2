@@ -1,0 +1,40 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /consumer
+spring:
+  application:
+    name: springcloud-consumer
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        instance-enabled: true
+        enabled: true
+        group: DEFAULT_GROUP
+logging:
+  config: classpath:config/logback.xml
+feign:
+  #开启feign断路器 依赖hystrix包
+  circuitbreaker:
+    enabled: true
+  #只有设置hystrix的超时时间后 feign的超时调用才会生效
+  client:
+    config:
+      default: #也可以针对多个服务
+        connect-timeout: 60000
+        read-timeout: 60000
+hystrix:
+  command:
+    default: #也可以针对多个服务
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 # 设置hystrix的超时时间为60000ms

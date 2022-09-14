@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <!-- logback日志级别：TRACE < DEBUG < INFO < WARN < ERROR -->
+    <!-- 定义logback配置文件全局常量 -->
+    <property name = "PROJECT_NAME" value = "SpringCloud" />
+    <property name = "LOG_LOCATION" value = "D:/log" />
+
+    <appender name = "CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{50}] [%M] [line-%line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name = "ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_LOCATION}/${PROJECT_NAME}_log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_LOCATION}/${PROJECT_NAME}_%d{yyyy-MM-dd}_log%i.zip</FileNamePattern>
+            <!-- 日志保留的天数 -->
+            <MaxHistory>3650</MaxHistory>
+            <!-- 日志文件最大限制 -->
+            <MaxFileSize>100MB</MaxFileSize>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%thread] [%logger{50}] [%M] [%line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 可以定义filter 过滤指定的日志信息-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>-->
+    </appender>
+
+    <!-- mabtis输出的sql日志默认级别为DEBUG -->
+    <logger name="com.example.gxshen.repository" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ROLLINGFILE" />
+    </logger>
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref ="CONSOLE" />
+            <appender-ref ref="ROLLINGFILE" />
+        </root>
+    </springProfile>
+
+</configuration>
